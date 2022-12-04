@@ -44,7 +44,9 @@
                                   <tr>
                                       <th class="text-center">#</th>
                                       <th class="text-center">Category</th>
+                                      <th class="text-center">statut</th>
                                       <th class="text-center">Action</th>
+                                      
                                   </tr>
                               </thead>
                               <tbody>
@@ -54,8 +56,11 @@
                                       <td class="text-center">{{ $category->id }}</td>
                                       <td class="text-center">{{ $category->cat }}</td>
                                       <td class="text-center">
-                                          <button class="btn btn-sm btn-primary edit_cat" type="button" data-id="<?php echo $category->id ?>" data-name="<?php echo $category->cat ?>">Edit</button>
-                                          <button class="btn btn-sm btn-danger delete_cat" type="button" data-id="<?php echo $category->id ?>">Delete</button>
+                                        <button class="badge  badge-info state_cat" type="button" data-id="<?php echo $category->id ?>"><?php if($category->status == true){ print "ON";}else{print "OFF"; } ?></button>
+                                    </td>
+                                      <td class="text-center">
+                                          <button class="badge  badge-primary edit_cat" type="button" data-id="<?php echo $category->id ?>" data-name="<?php echo $category->cat ?>">Edit</button>
+                                          <button class="badge  badge-danger delete_cat" type="button" data-id="<?php echo $category->id ?>">Delete</button>
                                       </td>
                                   </tr>
                                   @endforeach
@@ -113,6 +118,7 @@
       $('.delete_cat').click(function(){
           _conf("Are you sure to delete this category?","delete_cat",[$(this).attr('data-id')])
       })
+
       function delete_cat($id){
           start_load()
           $.ajax({
@@ -127,7 +133,46 @@
                       },1500)
   
                   }
-              }
+              },
+            error:function(xhr, ajaxOptions, thrownError){
+                alert_toast(xhr.responseText,'success', 10000)
+
+                end_load();
+                
+                
+            }
+          })
+
+
+        }
+
+          $('.state_cat').click(function(){
+          _conf("Are you sure to change the state this category ?","state_cat",[$(this).attr('data-id')])
+      })
+    
+
+      function state_cat($id){
+          start_load()
+          $.ajax({
+              url:'<?= route("cat", "state") ?>',
+              method:'POST',
+              data:{id:$id, _token:'<?= csrf_token() ?>'},
+              success:function(resp){
+                  if(resp==1){
+                      alert_toast("State successfully Change",'success')
+                      setTimeout(function(){
+                          location.reload()
+                      },1500)
+  
+                  }
+              },
+            error:function(xhr, ajaxOptions, thrownError){
+                alert_toast(xhr.responseText,'success', 10000)
+
+                end_load();
+                
+                
+            }
           })
       }
   </script>

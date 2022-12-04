@@ -14,7 +14,7 @@ class VoteController extends Controller
     public function index()
     {
         $categories = array();
-        $categos = Category::with('voters')->get();
+        $categos = Category::where('status', true)->with('voters')->get();
        foreach ($categos as $categorie) {
         $use = Vote::where('cathegory_id', $categorie->id)->where('user_id', auth()->user()->id)->first();
             array_push($categories, compact('use', 'categorie'));
@@ -28,32 +28,37 @@ class VoteController extends Controller
     public function submit(Request $request)
     {
         
-      foreach ($request->opt_id as $key => $value) {
-        $categories = Category::with('voters')->get();
-        $cats = $categories->pluck('id');
-        foreach ($cats as $cat) {
-
-           if ($key == $cat) {
-              $cate = Voter::find(intval($value[0]));
-            $vote = Vote::where('cathegory_id', $cate->cathegory_id)->where('user_id', auth()->user()->id)->first();    
-            if ($vote == null) {
-                Vote::create([
-                    'user_id' => auth()->user()->id,
-                    'voter_id' => intval($value[0]),
-                    'cathegory_id' => $cate->cathegory_id,
-                ]);
-
-                return 1;
+      if (auth()->user()->type != 1) {
+        foreach ($request->opt_id as $key => $value) {
+            $categories = Category::where('status', true)->with('voters')->get();
+            $cats = $categories->pluck('id');
+            foreach ($cats as $cat) {
+    
+               if ($key == $cat) {
+                  $cate = Voter::find(intval($value[0]));
+                $vote = Vote::where('cathegory_id', $cate->cathegory_id)->where('user_id', auth()->user()->id)->first();    
+                if ($vote == null) {
+                    Vote::create([
+                        'user_id' => auth()->user()->id,
+                        'voter_id' => intval($value[0]),
+                        'cathegory_id' => $cate->cathegory_id,
+                    ]);
+    
+                    return 1;
+                }
+    
+               }
             }
-
-           }
-        }
+          }
+      }
+      else{
+            return response()->json(["message" => "Admin Can't Vote"],500);
       }
     }
 
     public function result()
     {
-        $categos = Category::with('voters')->get();
+        $categos = Category::where('status', true)->with('voters')->get();
         $categories = array();
        foreach ($categos as $categorie) {
         $colect = collect([]);
@@ -83,7 +88,7 @@ class VoteController extends Controller
    
     public function about()
     {
-        $categories = Category::with('voters')->get();
+        $categories = Category::where('status', true)->with('voters')->get();
 
         return view('vote.about-candidate', compact('categories'));
 

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cat');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
