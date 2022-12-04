@@ -34,7 +34,7 @@ class CreateUserRequest extends Mailable
     {
         $user = $this->user;
         $mdp = $this->mdp;
-        return $this->markdown('emails.RequestActive', compact('user', 'mdp'))
+        return $this->markdown('emails.CreateUserRequest', compact('user', 'mdp'))
         ->from(env('MAIL_FROM_ADDRESS'))
         ->subject( "INFORMATIONS D'AUTHENTIFICATION IAI-VOTE" );
     }
