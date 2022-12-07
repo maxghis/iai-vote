@@ -21,11 +21,18 @@ return new class extends Migration
             $table->string('image_campagne');
             $table->string('video_campagne');
             $table->unsignedBiginteger('cathegory_id');
+            $table->unsignedBiginteger('mat_user_id');
             
 
             $table->foreign('cathegory_id')
             ->references('id')
             ->on('categories')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->foreign('mat_user_id')
+            ->references('id')
+            ->on('mat_users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 

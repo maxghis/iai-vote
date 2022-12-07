@@ -232,7 +232,7 @@ window._conf = function($msg='',$func='',$params = []){
     $('#alert_toast').removeClass('bg-success')
     $('#alert_toast').removeClass('bg-danger')
     $('#alert_toast').removeClass('bg-info')
-    $('#alert_toast').removeClass('bg-warning')
+    $('#alert_toast').removeClass('bg-danger')
 
   if($bg == 'success')
     $('#alert_toast').addClass('bg-success')
@@ -240,8 +240,8 @@ window._conf = function($msg='',$func='',$params = []){
     $('#alert_toast').addClass('bg-danger')
   if($bg == 'info')
     $('#alert_toast').addClass('bg-info')
-  if($bg == 'warning')
-    $('#alert_toast').addClass('bg-warning')
+  if($bg == 'danger')
+    $('#alert_toast').addClass('bg-danger')
   $('#alert_toast .toast-body').html($msg)
   $('#alert_toast').toast({delay:1000000000}).toast('show');
 }

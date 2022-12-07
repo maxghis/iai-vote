@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\ModelValide;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\CreateUserRequest;
@@ -59,6 +60,7 @@ class UserController extends Controller
                     'name' => ['required', 'string', 'max:255'],
                     'type' => ['required', 'in:1,2'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'matricule' => ['required', 'unique:users', new ModelValide('MatUser', 'matricule', 'matricule')],
                 ]);
 
 
@@ -73,6 +75,7 @@ class UserController extends Controller
                     'name' => $request->name,
                     'username' => $ran,
                     'email' => $request->email,
+                    'matricule' => $request->matricule,
                     'password' => Hash::make($pass),
                     'type' => $request->type,
                 ]);
@@ -121,5 +124,10 @@ class UserController extends Controller
             return response()->json(['Page not Found'], 404);
         }
         
+    }
+
+    public function onactive()
+    {
+       return response()->json('Fonctionalite desactive', 500);
     }
 }

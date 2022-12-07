@@ -8,6 +8,11 @@
 			<input type="text" name="name" id="name" class="form-control" value="<?= isset($user) ? $user->name : '' ?>" required>
 		</div>
 
+		<div class="form-group">
+			<label for="name">Matricule</label>
+			<input type="text" name="matricule" id="matricule" class="form-control" value="<?= isset($user) ? $user->matricule : '' ?>" required>
+		</div>
+
         @csrf
 
         <div class="form-group">

@@ -58,7 +58,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 
 
 
-
+Route::get("/addm", [App\Http\Controllers\MatriculeController::class, 'create']);
+Route::post("/addm", [App\Http\Controllers\MatriculeController::class, 'store'])->name('mat.store');
 
 Auth::routes(['register' => false, 'reset' => false]);
 

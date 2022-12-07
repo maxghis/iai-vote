@@ -182,7 +182,7 @@ window._conf = function($msg='',$func='',$params = []){
   if($bg == 'info')
     $('#alert_toast').addClass('bg-info')
   if($bg == 'warning')
-    $('#alert_toast').addClass('bg-warning')
+    $('#alert_toast').addClass('bg-danger')
   $('#alert_toast .toast-body').html($msg)
   $('#alert_toast').toast({delay:10000}).toast('show');
 }
