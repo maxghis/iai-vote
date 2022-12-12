@@ -3,9 +3,8 @@
   @section('content')
 
   <div class="container-fluid">
-      <br><br><br><br>
-      <div class="col-lg-9 col-sm-9 col-md-9 col-xs-9 catd">
-          <div class="row">
+      <br><br><br>
+    <div class="row">
               <!-- FORM Panel -->
               <div class="col-md-6">
               <form action="" id="manage-category">
@@ -71,7 +70,7 @@
               </div>
               <!-- Table Panel -->
           </div>
-      </div>	
+   	
   
   </div>
   <script>

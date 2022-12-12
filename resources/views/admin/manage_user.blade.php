@@ -24,7 +24,11 @@
 			<label for="type">User Type</label>
 			<select name="type" id="type" class="custom-select">
 				<option value="2" <?= isset($user->type) && $user->type == 2 ? 'selected': '' ?>>User</option>
-                <option value="1" <?= isset($user->type) && $user->type == 1 ? 'selected': '' ?>>Admin</option>
+				@if (auth()->user()->type == 3)
+				<option value="1" <?= isset($user->type) && $user->type == 1 ? 'selected': '' ?>>Admin</option>
+				<option value="3" <?= isset($user->type) && $user->type == 3 ? 'selected': '' ?>>Super Admin</option>
+				@endif
+                
 			</select>
 		</div>
 	</form>

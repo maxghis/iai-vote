@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Voter;
+use App\Models\Classe;
 use App\Models\Category;
+use App\Rules\ModelValide;
 use App\Rules\FileValidate;
 use Illuminate\Http\Request;
+use App\Rules\MultiFilesValidate;
 use Illuminate\Support\Facades\Storage;
 
 class CandidateController extends Controller
@@ -13,28 +16,35 @@ class CandidateController extends Controller
     public function manage_candidate()
     {
         $categories = Category::where('status', true)->with('voters')->get();
+        $classes = Classe::where('name', '!=', 'admin')->get();
        
-       return view('admin.manage_candidate', compact('categories'));
+       return view('admin.manage_candidate', compact('categories', 'classes'));
     }
 
     public function manage_candi()
     {
         $categories = Category::where('status', true)->with('voters')->get();
+        $classes = Classe::where('name', '!=', 'admin')->get();
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
             $user = Voter::find($id);
+            
 
-            if ($user != null) {
+            if ($user != null && $_GET['vid'] == "update") {
                
-                    return view('admin.man_candidate', compact('user', 'categories'));
+                    return view('admin.man_candidate', compact('user', 'categories', 'classes'));
                 
+            }
+            elseif ($user != null && $_GET['vid'] == "gallery") {
+                return view('admin.man_candidate-gallery', compact('user', 'categories', 'classes'));
                 
+                    
             }
 
             return response()->json(['invalid Input'], 404);
 
         }
-        return view('admin.man_candidate', compact('categories'));
+        return view('admin.man_candidate', compact('categories', 'classes'));
     }
     
 
@@ -61,6 +71,7 @@ class CandidateController extends Controller
 
                 $this->validate($request, [
                     'name' => ['required', 'string', 'max:255'],
+                    'classe' => ['required', new ModelValide('Classe', 'classe', 'name')],
                     'description' => ['required', 'max:500'],
                 'imgp' => ['required', new FileValidate($request, $aceptimg, $maxsuze, 'imgp')],
                 'imgc' => ['required', new FileValidate($request, $aceptimg, $maxsuze, 'imgc')],
@@ -70,6 +81,7 @@ class CandidateController extends Controller
       
                 Voter::create([
                     'name' => $request->name,
+                    'classe' => $request->classe,
                     'description' => htmlspecialchars($request->description),
                     'cathegory_id' => intval($request->type),
                     'image_campagne' => $request->file('imgc')->store('candidates/image_campagne', 'public'),
@@ -80,19 +92,26 @@ class CandidateController extends Controller
                return 1;
             } else {
 
+                if (!isset($request->gal)) {
                 $this->validate($request, [
                     'name' => ['required', 'string', 'max:255'],
+                    'classe' => ['required', new ModelValide('Classe', 'classe', 'name')],
                     'description' => ['required', 'max:500'],
                 ]);
           
                    
+               
                 $user->update([
                     'name' => $request->name,
+                    'classe' => $request->classe,
                     'description' => $request->description,
                 ]);
+               }
 
                 if ($request->hasFile('imgc')) {
+                    if (Storage::exists($user->image_campagne)) {
                     Storage::disk('public')->delete($user->image_campagne);
+                    }
                     $this->validate($request, [
                     'imgc' => ['required', new FileValidate($request, $aceptimg, $maxsuze, 'imgc')],
                     ]);
@@ -101,8 +120,11 @@ class CandidateController extends Controller
                     ]);
                 }
 
+
                 if ($request->hasFile('imgp')) {
+                    if (Storage::exists($user->image_profile)) {
                     Storage::disk('public')->delete($user->image_profile);
+                    }
                     $this->validate($request, [
                     'imgp' => ['required', new FileValidate($request, $aceptimg, $maxsuze, 'imgp')],
                     ]);
@@ -113,7 +135,9 @@ class CandidateController extends Controller
                 }
 
                 if ($request->hasFile('videoc')) {
+                    if (Storage::exists($user->video_campagne)) {
                     Storage::disk('public')->delete($user->video_campagne);
+                    }
                     $this->validate($request, [
                     'videoc' => ['required', new FileValidate($request, $aceptvideo, $maxsuze, 'videoc')],
                     ]);
@@ -121,6 +145,27 @@ class CandidateController extends Controller
                         'video_campagne' => $request->file('videoc')->store('candidates/video_profile', 'public'),
                     ]);
                 }
+
+
+                
+
+                for ($i=1; $i <= 10; $i++) { 
+                    $img = 'img'.strval($i);
+                    if ($request->hasFile($img)) {
+                        if (!empty($user->$img) && Storage::exists($user->$img)) {
+                        Storage::disk('public')->delete($user->$img);
+                        }
+                        $this->validate($request, [
+                        $img => ['required', new FileValidate($request, $aceptimg, $maxsuze, $img)],
+                        ]);
+                       // dd( $request->file('imgp')->store('candidates/image_profile', 'public'));
+                        $user->update([
+                            $img => $request->file($img)->store('candidates/gallery', 'public'),
+                        ]);
+                    }
+                }
+
+                
 
 
 

@@ -14,4 +14,9 @@ class Category extends Model
     {
         return $this->hasMany(Voter::class, 'cathegory_id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'cathegory_id');
+    }
 }

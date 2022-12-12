@@ -30,6 +30,7 @@ class ModelValide implements Rule
     public function passes($attribute, $value)
     {
         $use = ('\App\Models\\'.$this->model)::where($this->attr, $value)->first();
+       
         return $use != null;
     }
 

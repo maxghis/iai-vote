@@ -22,7 +22,9 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
-        'type'
+        'type',
+        'matricule',
+        'classe'
     ];
 
     /**
@@ -43,6 +45,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function matri()
+    {
+        return $this->belongsTo(MatUser::class, 'matricule', 'matricule');
+    }
 
    
 }

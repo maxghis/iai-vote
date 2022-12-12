@@ -59,6 +59,15 @@ class AdminController extends Controller
         return view('admin.users', compact('users', 'tip', 'nbre'));
     }
 
+    public function sadmin()
+    {
+        $tip = "Super Administrateur";
+        $nbre = User::where('type', 3)->count();
+        $users = User::where('type', 3)->orderBy('name', 'asc')->paginate(40);
+       
+        return view('admin.users', compact('users', 'tip', 'nbre'));
+    }
+
 
   
 

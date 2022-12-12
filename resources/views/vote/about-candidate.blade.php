@@ -3,15 +3,25 @@
 @section('content')
 <style>
 	.candidate {
-	    margin: auto;
-	    width: 16vw;
-	    padding: 10px;
-	    border-radius: 3px;
-	    margin-bottom: 1em;
-	}
+
+margin: auto;
+width: 16vw;
+padding: 10px;
+cursor: pointer;
+border-radius: 3px;
+margin-bottom: 1em;
+
+}
+
+@media(max-width:600px) {
+
+.candidate {
+width: 100%;
+}
+}
 	.candidate img {
-	    height: 14vh;
-	    width: 8vw;
+		height: 100%;
+	    width: 100%;
 	    margin: auto;
 	}
 	
@@ -44,7 +54,7 @@
 						
 					</div>
 					@foreach ($categories as $categorie)
-					<br><center><h4>{{ $categorie->cat }}</h4></center>
+					<br><center><h3><b>{{ $categorie->cat }}</b></h3></center>
 						<div class="row mt-3">
                             @foreach ($categorie->voters as $voter)
                           

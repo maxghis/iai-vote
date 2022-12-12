@@ -18,15 +18,19 @@ class Admin
     {
         if (!isset(auth()->user()->id)){
                 
-            return abort(404);   
+            return redirect()->route('index');   
                                       }
-     else {
+         else {
+        
+            if (auth()->user()->type == 3) {
+                return $next($request);
+            }
                                       
         if (auth()->user()->type == 1) {
             return $next($request);
         }
          
         }
-        abort(404);
+        return redirect()->route('index'); 
     }
 }

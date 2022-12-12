@@ -3,20 +3,29 @@
 @section('content')
 <style>
 	.candidate {
+
 	    margin: auto;
 	    width: 16vw;
 	    padding: 10px;
 	    cursor: pointer;
 	    border-radius: 3px;
-	    margin-bottom: 1em
+	    margin-bottom: 1em;
+		
 	}
+
+	@media(max-width:600px) {
+   
+	.candidate {
+	  width: 100%;
+	}
+  }
 	.candidate:hover {
 	    background-color: #80808030;
 	    box-shadow: 2.5px 3px #00000063;
 	}
 	.candidate img {
-	    height: 14vh;
-	    width: 8vw;
+	    height: 100%;
+	    width: 100%;
 	    margin: auto;
 	}
 	span.rem_btn {
@@ -122,7 +131,7 @@
 				</div>
 				<hr>
                 @csrf
-				<button class="btn-block btn-primary">Sumbit</button>
+				<button class="btn-block btn-lg btn-primary ">Sumbit</button>
 				</form>
 			</div>
 		</div>

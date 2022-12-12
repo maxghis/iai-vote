@@ -7,6 +7,7 @@ use App\Rules\ModelValide;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\CreateUserRequest;
+use App\Models\MatUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,7 +17,7 @@ class UserController extends Controller
     {
         $tip = "Electeurs";
         $nbre = User::where('type', 2)->count();
-        $users = User::where('type', 2)->orderBy('name', 'asc')->paginate(30);
+        $users = User::where('type', 2)->orderBy('name', 'asc')->paginate(1000);
        
         return view('admin.users', compact('users', 'tip', 'nbre'));
     }
@@ -53,17 +54,29 @@ class UserController extends Controller
                 $request->id = 0;
             }
             $user = User::find($request->id);
+            $userMat = User::where("matricule", $request->matricule)->first();
 
             if ($user == null) {
 
+             if (auth()->user()->type == 3) {
                 $this->validate($request, [
                     'name' => ['required', 'string', 'max:255'],
-                    'type' => ['required', 'in:1,2'],
+                    'type' => ['required', 'in:1,2,3'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'matricule' => ['required', 'unique:users', new ModelValide('MatUser', 'matricule', 'matricule')],
                 ]);
+             } else {
+                $this->validate($request, [
+                    'name' => ['required', 'string', 'max:255'],
+                    'type' => ['required', 'in:2'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'matricule' => ['required', 'unique:users', new ModelValide('MatUser', 'matricule', 'matricule')],
+                ]);
+             }
+             
 
-
+                $matuse = MatUser::where('matricule', $request->matricule)->first();
+            
                 $ran = strtolower(str_shuffle(strrev(Str::random(5))));
                 $ver = User::where('username', $ran)->first();
                 while ($ver != null) {
@@ -74,6 +87,7 @@ class UserController extends Controller
                 $utilisateur = User::create([
                     'name' => $request->name,
                     'username' => $ran,
+                    'classe' => $matuse->classe,
                     'email' => $request->email,
                     'matricule' => $request->matricule,
                     'password' => Hash::make($pass),

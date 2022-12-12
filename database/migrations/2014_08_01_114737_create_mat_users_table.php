@@ -16,7 +16,14 @@ return new class extends Migration
         Schema::create('mat_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('matricule')->unique();
+            $table->string('classe');
             $table->timestamps();
+
+            $table->foreign('classe')
+            ->references('name')
+            ->on('classes')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

@@ -28,7 +28,7 @@ class VoteController extends Controller
     public function submit(Request $request)
     {
         
-      if (auth()->user()->type != 1) {
+      if (auth()->user()->type == 2 ) {
         foreach ($request->opt_id as $key => $value) {
             $categories = Category::where('status', true)->with('voters')->get();
             $cats = $categories->pluck('id');

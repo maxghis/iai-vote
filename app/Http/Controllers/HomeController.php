@@ -26,7 +26,10 @@ class HomeController extends Controller
        if (isset(auth()->user()->type) AND auth()->user()->type == 1) {
         return redirect()->route('adminDashboard');
        }
-       elseif (isset(auth()->user()->type) AND auth()->user()->type == 2) {
+       elseif (isset(auth()->user()->type) AND auth()->user()->type == 3) {
+        return redirect()->route('adminDashboard');
+      }
+      elseif (isset(auth()->user()->type) AND auth()->user()->type == 2) {
         return redirect()->route('userVote');
       }
        else{

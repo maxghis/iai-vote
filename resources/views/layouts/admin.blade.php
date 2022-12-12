@@ -1,151 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin Panel | </title>
 
-  <title>Systeme de vote</title>
- 	
-
-<meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/all.min.css')}}">
-
-
-  <!-- Vendor CSS Files -->
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/icofont/icofont.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
-  <link href="{{ asset('assets/DataTables/datatables.min.css')}}" rel="stylesheet">
-
-
-  <!-- Template Main CSS File -->
-  <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
-  <link type="text/css')}}" rel="stylesheet" href="{{ asset('assets/css/jquery-te-1.4.0.css')}}">
-  
-  <script src="{{ asset('assets/vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{ asset('assets/DataTables/datatables.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/jquery.easing/jquery.easing.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{ asset('assets/vendor/venobox/venobox.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/waypoints/jquery.waypoints.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/counterup/counterup.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
-  <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('assets/font-awesome/js/all.min.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('assets/js/jquery-te-1.4.0.min.js')}}" charset="utf-8"></script>
-
-
-</head>
-<style>
-	body{
-        background: #80808045;
-  }
-</style>
-
-<body>
-	<style>
-        .logo {
-        margin: auto;
-        font-size: 20px;
-        background: white;
-        padding: 5px 11px;
-        border-radius: 50% 50%;
-        color: #000000b3;
-    }
-
-    
-
-
-
-@media(max-width:768px) {
+  <!-- Bootstrap -->
+ 
+  <link href="{{ asset('assets/app/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{ asset('assets/app/gentelella/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{ asset('assets/app/gentelella/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="{{ asset('assets/app/gentelella/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
    
-    .tab{
-        display: none;
-    } 
-}
-
-    .catd{
-        float: right;
-       margin: 0  auto;
-       margin-right: 45px;
-    }
-    </style>
-    
-    <nav class="navbar navbar-dark bg-dark fixed-top " style="padding:0;">
-      <div class="container-fluid mt-2 mb-2">
-          <div class="col-lg-12">
-
-              <div class="col-md-1 float-right" style="display: flex;">
-                <a href="#" class="logo mainuu">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-
-              
-              
-        </div>
-      </div>
-      
-    </nav>
-	
-<style>
-	
-</style>
-
-<nav id="sidebar" class='mx-lt-5 bg-dark tab' >
-		<br><br><br><br>
-     
-		<div class="sidebar-list">
-                
-				<a href="{{ route('adminDashboard') }}" class="nav-item nav-home"><span class='icon-field'><i class="fa fa-home"></i></span> Tableau De Bord</a>
-				<a href="{{ route('categoy_list') }}" class="nav-item nav-categories"><span class='icon-field'><i class="fa fa-list"></i></span>&nbsp;categorie d'election</a>
-                <a href="{{ route('user.elct') }}" class="nav-item nav-users"><span class='icon-field'><i class="fa fa-users"></i></span> Electeurs</a>
-                <a href="{{ route('man_can') }}" class="nav-item nav-voting_list nav-manage_voting"><span class='icon-field'><i class="fa fa-poll-h"></i></span>Gerer Candidats</a>
-                <a href="{{ route('vote.about.candidate') }}" class="nav-item nav-voting_list nav-manage_voting"><span class='icon-field'><i class="fa fa-list"></i></span>A propos Candidats</a>
-                <a href="{{ route('user.admin') }}" class="nav-item nav-users"><span class='icon-field'><i class="fa fa-user"></i></span> Administrateurs</a>
-          
-                    <a class="nav-item nav-users" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">
-                                         <i class="fa fa-power-off"></i> {{ auth()->user()->name }} 
-                                      </a>
   
-                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                          @csrf
-                                      </form>
+  
+<!-- jQuery -->
+<script src="{{ asset('assets/app/gentelella/vendors/jquery/dist/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('assets/app/gentelella/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+<!-- FastClick -->
+<script src="{{ asset('assets/app/gentelella/vendors/fastclick/lib/fastclick.js')}}"></script>
+<!-- NProgress -->
+<script src="{{ asset('assets/app/gentelella/vendors/nprogress/nprogress.js')}}"></script>
+<!-- iCheck -->
+<script src="{{ asset('assets/app/gentelella/vendors/iCheck/icheck.min.js')}}"></script>
+
+  @yield('autre-style')
+
+  <!-- Custom Theme Style -->
+    <link href="{{ asset('assets/app/gentelella/build/css/custom.min.css')}}" rel="stylesheet">
+
+   
+    {{-- <!-- jQuery custom content scroller -->
+    <script src="{{ asset('assets/app/gentelella/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script> --}}
 
 
-                                      <div class="col-md-1 float-left" style="display: flex;">
-                                        <div class="logo">
-                                            <i class="fa fa-poll-h"></i>
-                                        </div>
-                                    </div>                     
+  </head>
 
-			
-		</div>
+  <body class="nav-md">
 
-</nav>
-<script>
-	$('.nav-<?php echo isset($_GET['page']) ? $_GET['page'] : '' ?>').addClass('active')
-</script>
-
+    
   <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="col-md-1 float-left" style="display: flex;">
-        <a href="#" class="logo closoast">
-            <i class="fa fa-power-off"></i>
+        <a href="#" class="logo closoast text-white ">
+            <h4><i class="fa fa-close"></i>&nbsp;&nbsp;</h4>
         </a>
     </div>
     <h5>
@@ -156,111 +61,213 @@
     </div>
 </h5>
   </div>
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="{{url('/')}}" class="site_title"> <span>{{config('app.name', 'APP')}}</span></a>
+            </div>
  
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+            
+              <div class="profile_info">
+                <span>Bienvenu,</span>
+                <h2>{{ Str::words( auth()->user()->name, 1, ' ') }}</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+               
+                <ul class="nav side-menu">
+                  <li><a href="{{route('adminDashboard')}}"><i class="fa fa-dashboard"></i> Tableau De Bord</a>
+                  </li>
+                  @if (auth()->user()->type == 3)
+                  <li><a href="{{route('categoy_list')}}"><i class="fa fa-bar-chart-o"></i> Elections </a>
+                  @endif
+                  </li>
+                  <li><a><i class="fa fa-male"></i> Candidat <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{route('man_can')}}">{{__("Gerer Candidats")}}</a></li>
+                
+                      <li><a href="{{route('vote.about.candidate')}}">{{__("Afficher Candidats")}}</a></li>
+                    
+                    </ul>
+                  </li>
+
+             <li><a><i class="fa fa-users"></i> Utilisateurs <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="{{route('user.elct')}}">{{__("Electeurs")}}</a></li>
+                @if (auth()->user()->type == 3)
+                <li><a href="{{route('user.admin')}}">{{__("Admins")}}</a></li>
+                <li><a href="{{route('user.super.admin')}}">{{__("Supers Admins")}}</a></li>
+                @endif
+              
+              </ul>
+            </li>
+           
+            @if (auth()->user()->type == 3)
+            <li><a href="{{route('matricule.index')}}"><i class="fa fa-barcode"></i> Gerer Matricule</a>
+              
+            </li>
+            @endif
+           
+
+                </ul>
+              </div>
+      
+
+            </div>
+            <!-- /sidebar menu -->
+
+     
+          </div>
+        </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
+            <ul class=" navbar-right">
+              <li class="nav-item dropdown open" style="padding-left: 15px;">
+                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                 {{ Str::words( auth()->user()->name, 1, ' ') }}
+                </a>
+                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                 
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ route('logout') }}"
+              
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    <!-- /top navigation -->
+
+    <style>
+      .toast{
+  display: none;
+  min-width: 20vw;
+
+}
+.toast.show {
+    display: block;
+    opacity: 1;
+    position: fixed;
+    z-index: 99999999;
+    margin: 20px;
+    right: 0;
+    top: 3.5rem;
+}
+      /*--------------------------------------------------------------
+# Preloader
+--------------------------------------------------------------*/
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #fff;
+}
+
+#preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #1977cc;
+  border-top-color: #d1e6f9;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
+}
+#preloader2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #ffffff82;
+}
+
+#preloader2:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #1977cc;
+  border-top-color: #d1e6f9;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
+}
+@-webkit-keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+    </style>
+        <!-- page content -->
+        
+        <div class="right_col" role="main"  style="background-color: #dcdcdc">
     @yield('content')
 
+@include('admin.alert')
 
-<div id="preloader"></div>
-<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+</div>
+    
+<!-- /page content -->
 
-<div class="modal fade" id="confirm_modal" role='dialog'>
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title">Confirmation</h5>
-    </div>
-    <div class="modal-body">
-      <div id="delete_content"></div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </div>
-    </div>
-  </div>
+<!-- footer content -->
+<footer>
+  <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
 </div>
-<div class="modal fade" id="uni_modal" role='dialog'>
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <h5 class="modal-title"></h5>
-    </div>
-    <div class="modal-body">
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-    </div>
-    </div>
-  </div>
 </div>
+
+
+
+
+@yield('autre-style-fin')
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('assets/app/gentelella/build/js/custom.min.js')}}"></script>
 </body>
-<script>
-   window.start_load = function(){
-  $('body').prepend('<di id="preloader2"></di>')
-}
-window.end_load = function(){
-  $('#preloader2').fadeOut('fast', function() {
-      $(this).remove();
-    })
-}
-
-window.uni_modal = function($title = '' , $url=''){
-  start_load()
-  $.ajax({
-      url:$url,
-      error:err=>{
-          console.log()
-          alert("An error occured")
-      },
-      success:function(resp){
-          if(resp){
-              $('#uni_modal .modal-title').html($title)
-              $('#uni_modal .modal-body').html(resp)
-              $('#uni_modal').modal('show')
-              end_load()
-          }
-      }
-  })
-}
-window._conf = function($msg='',$func='',$params = []){
-   $('#confirm_modal #confirm').attr('onclick',$func+"("+$params.join(',')+")")
-   $('#confirm_modal .modal-body').html($msg)
-   $('#confirm_modal').modal('show')
-}
- window.alert_toast= function($msg = 'TEST',$bg = 'success'){
-    $('#alert_toast').removeClass('bg-success')
-    $('#alert_toast').removeClass('bg-danger')
-    $('#alert_toast').removeClass('bg-info')
-    $('#alert_toast').removeClass('bg-danger')
-
-  if($bg == 'success')
-    $('#alert_toast').addClass('bg-success')
-  if($bg == 'danger')
-    $('#alert_toast').addClass('bg-danger')
-  if($bg == 'info')
-    $('#alert_toast').addClass('bg-info')
-  if($bg == 'danger')
-    $('#alert_toast').addClass('bg-danger')
-  $('#alert_toast .toast-body').html($msg)
-  $('#alert_toast').toast({delay:1000000000}).toast('show');
-}
-$(document).ready(function(){
-  $('#preloader').fadeOut('fast', function() {
-      $(this).remove();
-    })
-})
-
-
-$(document).ready(function(){
-  $('.closoast').on('click', function() {
-    $('#alert_toast').toast('hide');
-    })
-})
-$(document).ready(function(){
-  $('.mainuu').on('click', function() {
-    $('.tab').toggle();
-    })
-})
-</script>	
 </html>

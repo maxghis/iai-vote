@@ -92,29 +92,6 @@ a.custom-menu-list span.icon{
 </style>
 
 <div class="containe-fluid">
-<br><br>
-	<div class="row mt-8 ml-1 mr-5">
-		<div class="col-lg-12">
-			<div class="card col-md-4 offset-2 bg-info ml-4 float-left">
-				<div class="card-body text-white">
-					<h4><b>Electeurs</b></h4>
-					<hr>
-					<span class="card-icon"><i class="fa fa-users"></i></span>
-					<h3 class="text-right"><b>{{ $voters }}</b></h3>
-				</div>
-			</div>
-
-            <div class="card col-md-4 offset-2 bg-primary ml-4 float-left">
-				<div class="card-body text-white">
-					<h4><b>Votes</b></h4>
-					<hr>
-					<span class="card-icon"><i class="fa fa-user-tie"></i></span>
-					<h3 class="text-right"><b>{{ $user_votes }}</b></h3>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="row mt-3 ml-3 mr-3">
 		<div class="col-lg-12">
 			<div class="card">
@@ -148,6 +125,19 @@ a.custom-menu-list span.icon{
 									</div>
 							</div>
 						</div>
+						
+						<div class="row mt-8 ml-5">
+					
+							
+							<div class="card-body pull-left">
+								<h4><b><i class="fa fa-users"></i> Electeurs</b> {{ $voters }}</h4>
+							</div>
+						
+							<div class="card-body pull-right">
+								<h4><b><i class="fa fa-user-tie"></i> Votes</b> {{ $categorie['categorie']->votes->count() }}</h4>
+							</div>
+						
+				       </div>
 
                         <div class="col-lg-7 col-sm-7 col-md-7 col-xs-7 cont">
                         @foreach ($categorie['electTries'] as $electTrie)

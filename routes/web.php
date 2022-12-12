@@ -3,11 +3,12 @@
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\MatriculeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,6 @@ use App\Http\Controllers\UserController;
 Route::middleware(['admin'])->group(function () {
  
     Route::get("/dashboard", [AdminController::class, 'index'])->name('adminDashboard');
-    Route::get("/users/admin", [AdminController::class, 'admin'])->name('user.admin');
-    
-    Route::get("/categories", [CategoryController::class, 'category'])->name('categoy_list');
-    Route::post("/category/{action}", [CategoryController::class, 'del_save_cat'])->name('cat');
-   
     Route::get("/manage_user", [UserController::class, 'manage_users'])->name('man_user');
     Route::post("/user_manager/{action}", [UserController::class, 'del_save_user'])->name('user_manager');
     Route::get("/users/electeurs", [UserController::class, 'users'])->name('user.elct');
@@ -37,6 +33,22 @@ Route::middleware(['admin'])->group(function () {
 
     
 });
+
+
+Route::middleware(['sadmin'])->group(function () {
+
+    Route::get("/users/admin", [AdminController::class, 'admin'])->name('user.admin');
+    Route::get("/users/super-admin", [AdminController::class, 'sadmin'])->name('user.super.admin');
+
+    Route::get("/matricule_index", [MatriculeController::class, 'index'])->name('matricule.index');
+    Route::get("/manage_matricule", [MatriculeController::class, 'manage_matricules'])->name('man_matricule');
+    Route::post("/matricule_manager/{action}", [MatriculeController::class, 'del_save_matricule'])->name('matricule_manager');
+    
+    Route::get("/categories", [CategoryController::class, 'category'])->name('categoy_list');
+    Route::post("/category/{action}", [CategoryController::class, 'del_save_cat'])->name('cat');
+    
+});
+
 
 Route::middleware(['auth'])->group(function () {
     

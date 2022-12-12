@@ -3,38 +3,54 @@
   @section('content')
 <style>
 	.candidate {
-	    margin: auto;
-	    width: 16vw;
-	    padding: 10px;
-	    cursor: pointer;
-	    border-radius: 3px;
-	    margin-bottom: 1em
-	}
+
+margin: auto;
+width: 16vw;
+padding: 10px;
+cursor: pointer;
+border-radius: 3px;
+margin-bottom: 1em;
+
+}
+
+@media(max-width:600px) {
+
+.candidate {
+width: 100%;
+}
+}
 	.candidate:hover {
 	    background-color: #80808030;
 	    box-shadow: 2.5px 3px #00000063;
 	}
 	.candidate img {
-	    height: 14vh;
-	    width: 8vw;
+	    height: 100%;
+	    width: 100%;
 	    margin: auto;
 	}
+
+	
 	span.rem_btn {
 	    position: absolute;
 	    right: 0;
 	    top: -1em;
 	    z-index: 10
 	}
+
+	span.rem_btnn {
+	    position: absolute;
+	    left: 0;
+	    top: -1em;
+	    z-index: 10
+	}
 </style>
 <div class="container-fluid">
     <br><br><br>
-	<div class="col-lg-9 col-sm-9 col-md-9 col-xs-9 catd">
 		<div class="card">
 			<div class="card-body">
-				<div class="col-lg-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="text-center">
 						<h3><b>Candidats Aux Elections</b></h3>
-						
 					</div>
 					<hr>
 					<div class="row">
@@ -55,8 +71,9 @@
                             @foreach ($categorie->voters as $voters)
 							<div class="candidate" style="position: relative;">
 								<span class="rem_btn"><button class="btn btn-rounded btn-sm btn-outline-danger del_candidated" data-id="<?php echo $voters->id ?>"><i class="fa fa-trash"></i></button></span>
+								<span class="rem_btnn"><button class="btn btn-rounded btn-sm btn-outline-warning update_galery" data-id="<?php echo $voters->id ?>"><i class="fa fa-image"></i></button></span>
 								<div class="item"  data-id="<?php echo $voters->id ?>">
-								<div style="display: flex">
+								<div style="display:flex;">
 									<img src="{{ asset('storage/' . $voters->image_profile) }}" alt="">
 								</div>
 								<br>
@@ -74,21 +91,28 @@
 				
 			</div>
 		</div>
-	</div>
+	
 </div>
 <script>
 	$('#new_opt').click(function(){
 		uni_modal("New Candidate",'<?= route("man_candidate") ?>')
 	})
 	$('.candidate>.item').click(function(){
-		uni_modal("Edit Candidate",'<?= route("man_candidate") ?>?vid=>&id='+$(this).attr('data-id'))
+		uni_modal("Edit Candidate",'<?= route("man_candidate") ?>?vid=update&id='+$(this).attr('data-id'))
 	})
+
+	$('.update_galery').click(function(){
+		uni_modal("Edit Candidate",'<?= route("man_candidate") ?>?vid=gallery&id='+$(this).attr('data-id'))
+	})
+
+
 	$('.del_candidated').click(function(e){
 		e.preventDefault()
 		_conf("Are you sure to delete this candidate?","delete_candidate",[$(this).attr('data-id')])
 	})
 	function delete_candidate($id){
-	
+		e.preventDefault();
+		start_load()
 		$.ajax({
 			url:'<?= route("candidate_manager", "delete") ?>',
 			method:'POST',
@@ -103,6 +127,7 @@
 				}
 			},
             error:function(xhr, ajaxOptions, thrownError){
+				
                 alert_toast(xhr.responseText,'success', 10000)
 
                 end_load();

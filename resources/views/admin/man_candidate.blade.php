@@ -32,6 +32,29 @@
 
         @endisset 
 
+
+		@isset($user)
+		<div class="form-group">
+			<label for="type">Classe </label>
+			<select name="classe" id="classe" class="custom-select">
+				@foreach ($classes as $classe)
+                <option value="{{ $classe->name }}" <?=  $classe->name == $user->classe ? 'selected': '' ?>>{{ $classe->name }}</option>
+                @endforeach
+			</select>
+		</div>
+
+        @else
+        <div class="form-group">
+			<label for="classe">Classe </label>
+			<select name="classe" id="classe" class="custom-select">
+				@foreach ($classes as $classe)
+                <option value="{{ $classe->name }}">{{ $classe->name }}</option>
+                @endforeach
+			</select>
+		</div>
+
+        @endisset 
+
         <div class="form-group">
             <label for="" class="control-label">Desciption</label>
             <textarea name="description" id="" cols="30" rows="5"><?= isset($user) ? $user->description : '' ?></textarea>
@@ -51,6 +74,7 @@
             <label for="" class="control-label">Video Campagne</label>
             <input type="file" accept="video/*" class="form-control" name="videoc">
         </div>
+
 
 	</form>
 </div>
