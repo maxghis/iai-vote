@@ -62,7 +62,12 @@
 					
 				<div class="col-lg-12">
 					<div class="text-center">
-						<h3><b>Vote</b></h3>
+						@if (count($categories) == 0)
+							<h1>Les Votes Ont Ete Arreter</h1>
+						@else
+						<h6><b>Vote</b></h6>
+						@endif	
+					
 						
 					</div>
 					
@@ -130,8 +135,10 @@
                         @endforeach
 				</div>
 				<hr>
-                @csrf
-				<button class="btn-block btn-lg btn-primary ">Sumbit</button>
+               @if (count($categories) > 0)
+			   @csrf
+			   <button class="btn-block btn-lg btn-primary ">Sumbit</button>
+			   @endif
 				</form>
 			</div>
 		</div>

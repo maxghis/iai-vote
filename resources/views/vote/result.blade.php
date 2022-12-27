@@ -113,7 +113,11 @@ a.custom-menu-list span.icon{
 						<h3><b>Vote</b></h3>
 						
 					</div>
-					
+					@if (count($categories) == 0)
+					<center>
+						<h2>Les Resultats Ne Sont Pas Encore Disponible Veillez Reesayer Ulterieurement.</h2>
+					</center>
+					@endif
 					@foreach ($categories as $categorie)
                     
 						<div>

@@ -35,15 +35,13 @@
 		  <tr>
 			  <th>#</th>
 
-			  <th>Nom</th>
-
 			  <th>Identifiant</th>
-
-			  <th>Email</th>
 
 			  <th>Classe</th>
 
-			  <th>Action</th>
+			  <th>Candidat</th>
+
+			
 
 		  </tr>
 		</thead>
@@ -56,29 +54,11 @@
 
 			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->id}}
 
-			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->name}}</td>
+			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->user->username}}</td>
 
-			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->username}}</td>
+			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->user->classe}}</td>
 
-			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->email}}</td>
-
-			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->classe}}</td>
-
-			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">
-				<center>
-					<div class="btn-group">
-					  <button type="button" class="btn btn-primary">Action</button>
-					  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="sr-only">Toggle Dropdown</span>
-					  </button>
-					  <div class="dropdown-menu">
-						<a class="dropdown-item edit_user" href="javascript:void(0)"  data-id = '<?php echo $user->id ?>'>Edit</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item delete_user" href="javascript:void(0)" data-id = '<?php echo $user->id ?>'>Delete</a>
-					  </div>
-					</div>
-				</center>
-			  </td>
+			  <td data-toggle="modal" data-target=".bs-{{ $user->id }}-modal-lg">{{$user->candidate->name}}</td>
 
 
 		  </tr>
@@ -103,19 +83,7 @@
   </div>
 
 </div>
-<script>
-	
-$('#new_user').click(function(){
-	uni_modal('New User','<?= route("man_user") ?>')
-})
-$('.edit_user').click(function(){
-	uni_modal('Edit User','<?= route("man_user") ?>?id='+$(this).attr('data-id'))
-})
-$('.delete_user').click(function(){
-	uni_modal('Delete User','<?= route("man_user") ?>?type=del&id='+$(this).attr('data-id'))
-})
 
-</script>
 
 
 

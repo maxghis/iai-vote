@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -46,4 +48,50 @@ class LoginController extends Controller
     {
         return $this->username;
     }
+
+     /**
+
+     * Write code on Method
+
+     *
+
+     * @return response()
+
+     */
+
+     public function login(Request $request)
+
+     {
+ 
+         $request->validate([
+ 
+             'username' => 'required',
+             'password' => 'required',
+             //'g-recaptcha-response' => 'required|captcha'
+            
+ 
+         ]);
+ 
+      
+ 
+         $credentials = $request->only('username', 'password');
+ 
+      
+         if (Auth::attempt(["username" => $credentials['username'], "password" => $credentials['password']])) {
+ 
+   
+ 
+             auth()->user()->generateCode();
+ 
+   
+ 
+             return redirect()->route('2fa.index');
+ 
+         }
+        
+ 
+        return back()->withErrors(["username" => "Oppes! Vos informations ne sont pas corrects veuillez réessayer "]);
+ 
+ 
+     }
 }

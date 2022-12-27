@@ -6,6 +6,9 @@ use App\Models\Classe;
 use App\Models\MatUser;
 use App\Rules\ModelValide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Spatie\SimpleExcel\SimpleExcelReader;
 
 class MatriculeController extends Controller
 {
@@ -107,19 +110,39 @@ class MatriculeController extends Controller
         }
 
         elseif ($action == "mass-save") {
+            $maxsuze = 921323323;
             $this->validate($request, [
+                'fichier' => 'bail|required|file|mimes:xlsx',
                 'classe' => ['required', new ModelValide('Classe', 'classe', 'name')],
+                
                 ]);
-            $matricules = explode("_", $request->matricule);
-           foreach ($matricules as $matricule) {
-                $mat = MatUser::where('matricule', $matricule)->first();
-                if ($mat == null) {
+
+            $namep = $request->fichier->hashName();
+            $fichier = $request->fichier->move(public_path().'/tmp', $namep);
+
+            $reader = SimpleExcelReader::create($fichier);
+
+            $rows = $reader->getRows();
+
+         
+           
+           foreach ($rows->toArray() as  $mat) {
+
+            if ( array_key_exists('mat', $mat) ) {
+
+                $matri = MatUser::where('matricule', $mat['mat'])->first();
+                if ($matri == null) {
                     MatUser::create([
-                        'matricule' => $matricule,
+                        'matricule' => $mat['mat'],
                         'classe' => $request->classe,
                     ]);
                 }
+               
+            }
+               
            }
+
+          File::deleteDirectory('tmp');
 
            return 1;
         }

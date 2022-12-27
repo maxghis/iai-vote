@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	
-	<form action="" id="manage-matricule">
+	<form action="" id="manage-matricule" enctype="multipart/form-data">
        
 		<input type="hidden" name="matricule" value="<?= isset($matricule) ? $matricule->id : '' ?>">
 		<div class="form-group">
-			<label for="name">Matricule</label>
-			<textarea cols="40" rows="7"  name="matricule" id="<?= isset($matricule) ? $matricule->id : '' ?>" class="form-control"  required></textarea>
+			<label for="name">Fichers excel Matricules</label>
+			<input type="file" name="fichier" id="<?= isset($matricule) ? $matricule->id : '' ?>" class="form-control"  required />
 		</div>
 
 
@@ -28,8 +28,12 @@
 		start_load()
 		$.ajax({
             url:'<?= route("matricule_manager", "mass-save") ?>',
-			method:'POST',
-			data:$(this).serialize(),
+			data: new FormData($(this)[0]),
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    method: 'POST',
+		    type: 'POST',
 			success:function(resp){
 				if(resp ==1){
 					alert_toast("Data successfully saved",'success')

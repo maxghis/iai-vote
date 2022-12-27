@@ -58,7 +58,7 @@ class VoteController extends Controller
 
     public function result()
     {
-        $categos = Category::where('status', true)->with('voters')->get();
+        $categos = Category::where('status', true)->orWhere('stateresult', true)->with('voters')->get();
         $categories = array();
        foreach ($categos as $categorie) {
         $colect = collect([]);
@@ -88,7 +88,7 @@ class VoteController extends Controller
    
     public function about()
     {
-        $categories = Category::where('status', true)->with('voters')->get();
+        $categories = Category::where('status', true)->orWhere('stateresult', true)->with('voters')->get();
 
         return view('vote.about-candidate', compact('categories'));
 
@@ -97,6 +97,14 @@ class VoteController extends Controller
     public function aboutCandate(Voter $voter)
     {
        return view('vote.show-candidate', compact('voter'));
+    }
+
+    public function log(Category $category)
+    {
+        $tip = "Log Des Votes ".$category->cat;
+        $users = Vote::where('cathegory_id', $category->id)->paginate(1000);
+       
+        return view('vote.log', compact('users', 'tip'));
     }
 
     

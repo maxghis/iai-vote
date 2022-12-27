@@ -49,8 +49,13 @@ width: 100%;
 						
 					<div class="text-center">
 
-						<br>	
+						<br>
+						@if ($categories->count() == 0)
+							<h1>Les Votes Ont Ete Arreter</h1>
+						@else
 						<h6><b>Liste Des Candidat Aux Elections</b></h6>
+						@endif	
+						
 						
 					</div>
 					@foreach ($categories as $categorie)

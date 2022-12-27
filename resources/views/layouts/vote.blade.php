@@ -17,7 +17,6 @@
 
 <!-- Template Main CSS File -->
 <link href="{{ asset('assetsn/css/style.css')}}" rel="stylesheet">
-<link type="text/css')}}" rel="stylesheet" href="{{ asset('assetsn/css/jquery-te-1.4.0.css')}}">
 
 <script src="{{ asset('assetsn/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{ asset('assetsn/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

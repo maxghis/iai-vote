@@ -20,7 +20,7 @@ use App\Http\Controllers\MatriculeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['admin', '2fa'])->group(function () {
  
     Route::get("/dashboard", [AdminController::class, 'index'])->name('adminDashboard');
     Route::get("/manage_user", [UserController::class, 'manage_users'])->name('man_user');
@@ -35,7 +35,7 @@ Route::middleware(['admin'])->group(function () {
 });
 
 
-Route::middleware(['sadmin'])->group(function () {
+Route::middleware(['sadmin', '2fa'])->group(function () {
 
     Route::get("/users/admin", [AdminController::class, 'admin'])->name('user.admin');
     Route::get("/users/super-admin", [AdminController::class, 'sadmin'])->name('user.super.admin');
@@ -46,11 +46,13 @@ Route::middleware(['sadmin'])->group(function () {
     
     Route::get("/categories", [CategoryController::class, 'category'])->name('categoy_list');
     Route::post("/category/{action}", [CategoryController::class, 'del_save_cat'])->name('cat');
+
+    Route::get("/logvote/{category}", [VoteController::class, 'log'])->name('logvote');
     
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', '2fa'])->group(function () {
     
     Route::get("/vote", [VoteController::class, 'index'])->name('userVote');
     Route::post("/vote-submit", [VoteController::class, 'submit'])->name('userVote.submit');
@@ -70,8 +72,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 
 
 
-Route::get("/addm", [App\Http\Controllers\MatriculeController::class, 'create']);
-Route::post("/addm", [App\Http\Controllers\MatriculeController::class, 'store'])->name('mat.store');
+Route::get('2fa', [App\Http\Controllers\TwoFAController::class, 'index'])->name('2fa.index');
+Route::post('2fa', [App\Http\Controllers\TwoFAController::class, 'store'])->name('2fa.post');
+Route::get('2fa/reset', [App\Http\Controllers\TwoFAController::class, 'resend'])->name('2fa.resend');
 
 Auth::routes(['register' => false, 'reset' => false]);
 

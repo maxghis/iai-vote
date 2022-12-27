@@ -18,7 +18,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $categos = Category::where('status', true)->with('voters')->get();
+        $categos = Category::where('status', true)->orWhere('stateresult', true)->with('voters')->get();
         $categories = array();
        foreach ($categos as $categorie) {
         $colect = collect([]);

@@ -54,7 +54,34 @@ class CategoryController extends Controller
            }
            
         }
-        elseif($action == "state"){
+        elseif($action == "stateresult"){
+
+            $cat = Category::find($request->id);
+            if ($cat != null) {
+                
+                if ($cat->stateresult == 1) {
+                    $cat->update([
+                        'stateresult' => 0,
+                    ]);
+                    return 1;
+                }
+                else
+                {   $cat->update([
+                    'stateresult' => 1,
+                ]);
+
+                return 1;
+
+                }
+             return 1;
+            }
+            else {
+             return response()->json(['Ressource not found'], 202);
+            }
+            
+         }
+
+          elseif($action == "state"){
 
             $cat = Category::find($request->id);
             if ($cat != null) {

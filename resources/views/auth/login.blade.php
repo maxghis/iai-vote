@@ -39,17 +39,23 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
+                        <div class="row mb-3">
+                            <label for="capatcha">Captcha</label>
+                            <div class="col-md-6">
+                            <div class="captcha">
+                              <span>{!! app('captcha')->display() !!}</span>
+                              <!-- <button type="button" class="btn btn-success refresh-cpatcha"><i class="fa fa-refresh"></i></button> -->
                             </div>
-                        </div>
+                           
+                            @error('g-recaptcha-response')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                            </div>
+                          </div>
+
+            
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">

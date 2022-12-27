@@ -55,7 +55,9 @@
                                       <td class="text-center">{{ $category->id }}</td>
                                       <td class="text-center">{{ $category->cat }}</td>
                                       <td class="text-center">
-                                        <button class="badge  badge-info state_cat" type="button" data-id="<?php echo $category->id ?>"><?php if($category->status == true){ print "ON";}else{print "OFF"; } ?></button>
+                                        <button class="badge  badge-info state_cat" type="button" data-id="<?php echo $category->id ?>"><?php if($category->status == true){ print "OFF STATE";}else{print "ON STATE"; } ?></button>
+
+                                        <button class="badge  badge-info state_result_cat" type="button" data-id="<?php echo $category->id ?>"><?php if($category->stateresult == true){ print "OFF RESULT";}else{print "ON RESULT"; } ?></button>
                                     </td>
                                       <td class="text-center">
                                           <button class="badge  badge-primary edit_cat" type="button" data-id="<?php echo $category->id ?>" data-name="<?php echo $category->cat ?>">Edit</button>
@@ -159,6 +161,34 @@
               success:function(resp){
                   if(resp==1){
                       alert_toast("State successfully Change",'success')
+                      setTimeout(function(){
+                          location.reload()
+                      },1500)
+  
+                  }
+              },
+            error:function(xhr, ajaxOptions, thrownError){
+                alert_toast(xhr.responseText,'success', 10000)
+
+                end_load();
+                
+                
+            }
+          })
+      }
+
+      $('.state_result_cat').click(function(){
+          _conf("Are you sure to change the state of Result for this category ?","state_result_cat",[$(this).attr('data-id')])
+      })
+      function state_result_cat($id){
+          start_load()
+          $.ajax({
+              url:'<?= route("cat", "stateresult") ?>',
+              method:'POST',
+              data:{id:$id, _token:'<?= csrf_token() ?>'},
+              success:function(resp){
+                  if(resp==1){
+                      alert_toast("State Result successfully Change",'success')
                       setTimeout(function(){
                           location.reload()
                       },1500)

@@ -50,7 +50,7 @@ class CandidateController extends Controller
 
     public function del_save_can($action, Request $request)
     {
-        $aceptimg = array('image/jpg', 'image/jpeg', 'image/png', 'image/x-jg', '.bm image/bmp', 'image/gif', 'image/pjpeg');
+        $aceptimg = array('image/jpg', 'image/jpeg', 'image/png', 'image/x-jg', 'image/bmp', 'image/gif', 'image/pjpeg', 'image/webp');
         $aceptvideo = array('video/mp4');
         $maxsuze = 921323323;
         

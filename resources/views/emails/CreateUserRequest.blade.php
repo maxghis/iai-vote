@@ -4,9 +4,9 @@
 
 <br>
 
-<h4>Identifiant: <b>{{ $user->username }}</b></h4>
+<h1>Identifiant: <b>{{ $user->username }}</b></h1>
 
-<h4>Mot De Passe: <b>{{ $mdp }}</b></h4>
+<h1>Mot De Passe: <b>{{ $mdp }}</b></h1>
 
 <center>
     @component('mail::button', ['url' => route('index')])
